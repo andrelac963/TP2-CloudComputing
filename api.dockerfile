@@ -8,7 +8,7 @@ WORKDIR /api
 COPY api /api
 
 # Expõe a porta que seu aplicativo Flask está rodando
-EXPOSE 30500
+EXPOSE 30530
 
 # Comando para iniciar o aplicativo Flask
 CMD ["python", "app.py"]
