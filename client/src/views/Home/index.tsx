@@ -64,7 +64,7 @@ export function Home() {
 
       setInputSongs({ songs: [] });
     } catch (err: any) {
-      setAlertMessage(err.message);
+      setAlertMessage(err.response.data.error);
       setAlertVisibility(true);
     } finally {
       setIsLoading(false);
