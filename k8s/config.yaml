@@ -1,0 +1,92 @@
+#### BACKEND ####
+# flask ClusterIP service
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  type: ClusterIP
+  selector:
+    app: backend
+  ports:
+  - port: 30530
+    targetPort: 30530 
+---
+# flask NodePort for external querries
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-external
+spec:
+  type: NodePort
+  selector:
+    app: backend
+  ports:
+  - port: 30530
+    targetPort: 30530 
+---
+# flask api deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+      # k8s pull images from dockerhub by default
+        image: bernnardosbo/backend
+        resources:
+          limits:
+            memory: "1000Mi"
+            cpu: "1500m"
+        ports:
+        - containerPort: 30530
+  replicas: 1
+---
+### FRONTEND ###
+# react-nginx NodePort service
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: NodePort
+  selector:
+    app: frontend
+  ports:
+  - port: 80
+    targetPort: 80
+---
+# react-nginx deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: bernnardosbo/nginx-frontend
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "1000Mi"
+            cpu: "1500m"
+
