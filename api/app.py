@@ -4,8 +4,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:30500"}})
+#CORS(app, resources={r"/api/*": {"origins": ["http://localhost:30500", "http://127.0.0.1:80", "http://client:30500"]}})
+
 
 app.config['JSON_SORT_KEYS'] = False
 
@@ -43,5 +45,11 @@ def recommend():
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
+
+# by running 'flask run'     ->  __name__ != __main__
+# bu running 'python app.py' ->  __name__ == __main__
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=30530,
+        debug=True)
