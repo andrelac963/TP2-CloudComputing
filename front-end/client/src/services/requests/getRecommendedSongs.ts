@@ -1,5 +1,5 @@
-import { api } from "../api";
-
+// import { api } from "../api";
+import axios from 'axios'
 export interface InputSongsType {
   songs: string[];
 }
@@ -11,6 +11,10 @@ export interface RecommendedSongsResponseType {
 }
 
 export async function getRecommendedSongs(body: InputSongsType) {
-  const response = await api.post("/recommend", body);
+  const response = await axios.post("/recommend", body, {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
   return response.data as RecommendedSongsResponseType;
 }
