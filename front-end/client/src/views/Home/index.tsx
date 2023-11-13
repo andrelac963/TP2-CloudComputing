@@ -26,7 +26,7 @@ export function Home() {
   const [resultModalVisibility, setResultModalVisibility] = useState(false);
 
   const [songName, setSongName] = useState("");
-
+  
   async function addSong() {
     if (songName === "") {
       setAlertMessage("O nome da música não pode ser vazio.");

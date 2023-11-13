@@ -6,12 +6,11 @@
 Node 18.18.0
 Npm 9.8.1
 
-### Comandos para rodar em desenvolvimento:
->*alterações realizadas no projeto permitem apenas a sua execução no ambiente k8s*
->>~~npm install~~<br>
->>~~npm run dev~~<br>
+### Comandos para rodar localmente:
 
-Os diretórios foram alterados de forma a usar variáveis presentes apenas no ambiente k8s. Dessa forma, não é possível rodar o frontend de maneira local sem a alteração dessas variáveis. Uma tarefa destinada a resolver esses problemas foi inserida na **TODO** list abaixo.
+`npm install`
+
+`npm run dev`
 
 ### Comandos para montar a imagem
 Montar a imagem só é necessário caso haja alguma alteração na implementação do servidor web ou do cliente
@@ -21,7 +20,7 @@ Montar a imagem só é necessário caso haja alguma alteração na implementaç�
 `$ cd TP2-CloudComputing/front-end/client`
 
 
-`$ npm run build`
+`$ npm run k8s-build`
 
 *A build será realizada no diretório TP
 
@@ -45,11 +44,10 @@ Montar a imagem só é necessário caso haja alguma alteração na implementaç�
 Python 3.11.5
 
 ### Comandos para rodar em desenvolvimento:
->*alterações realizadas no projeto permitem apenas a sua execução no ambiente k8s*
->>~~pip install Flask flask_cors~~<br>
->>~~flask run --port=30530~~
 
-Os diretórios foram alterados de forma a usar variáveis presentes apenas no ambiente k8s. Dessa forma, não é possível rodar o backend de maneira local sem a alteração dessas variáveis. Uma tarefa destinada a resolver esses problemas foi inserida na **TODO** list abaixo.
+`pip install Flask flask_cors`
+
+`flask run --port=30530`
 
 ### Comandos para montar a imagem
 Montar a imagem só é necessário caso haja alguma alteração na implementação da api.
