@@ -13,10 +13,14 @@ import {
   Content,
   Title,
   Form,
+  FormContainer,
   InputContainer,
   Label,
   Input,
+  ButtonContainer,
   Button,
+  SongListContainer,
+  SongList,
 } from "./styles";
 
 export function Home() {
@@ -26,8 +30,10 @@ export function Home() {
   const [resultModalVisibility, setResultModalVisibility] = useState(false);
 
   const [songName, setSongName] = useState("");
-  
-  async function addSong() {
+
+  async function addSong(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     if (songName === "") {
       setAlertMessage("O nome da música não pode ser vazio.");
       setAlertVisibility(true);
@@ -48,11 +54,7 @@ export function Home() {
   const [recommendedSongs, setRecommendedSongs] =
     useState<RecommendedSongsResponseType>();
 
-  async function handleRecommendedSongs(
-    event: React.FormEvent<HTMLFormElement>
-  ) {
-    event.preventDefault();
-
+  async function handleRecommendedSongs() {
     try {
       setIsLoading(true);
 
@@ -76,33 +78,43 @@ export function Home() {
       <Container>
         <Content>
           <Title>Consulta de músicas recomendadas</Title>
-          <Form onSubmit={handleRecommendedSongs}>
-            <InputContainer>
-              <Label>Adicionar uma música</Label>
-              <Input
-                value={songName}
-                onChange={(event) => setSongName(event.target.value)}
-                placeholder="Nome da música"
-                type="text"
-                max-length="20"
-                aria-label="Nome da música"
-              />
-            </InputContainer>
 
-            <Button
-              type="button"
-              onClick={() => {
-                addSong();
-              }}
-            >
-              Adicionar
-            </Button>
-            <ul>
-              {inputSongs.songs.map((song, index) => (
-                <li key={index}>{song}</li>
-              ))}
-            </ul>
-            <Button type="submit">Enviar</Button>
+          <Form onSubmit={addSong}>
+            <FormContainer>
+              <InputContainer>
+                <Label>Adicionar uma música</Label>
+                <Input
+                  value={songName}
+                  onChange={(event) => setSongName(event.target.value)}
+                  placeholder="Nome da música"
+                  type="text"
+                  max-length="20"
+                  aria-label="Nome da música"
+                />
+              </InputContainer>
+              <ButtonContainer>
+                <Button type="submit">Adicionar</Button>
+              </ButtonContainer>
+            </FormContainer>
+            <FormContainer>
+              <SongListContainer>
+                <SongList>
+                  {inputSongs.songs.map((song, index) => (
+                    <li key={index}>{song}</li>
+                  ))}
+                </SongList>
+              </SongListContainer>
+              <ButtonContainer>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    handleRecommendedSongs();
+                  }}
+                >
+                  Enviar
+                </Button>
+              </ButtonContainer>
+            </FormContainer>
           </Form>
         </Content>
       </Container>
