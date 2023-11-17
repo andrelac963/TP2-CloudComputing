@@ -1,0 +1,33 @@
+name: Docker Client Build
+
+on:
+  push:
+    paths:
+      - '/client/**'
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - name: test-paths
+          run: echo "funfou"
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+
+  #     - name: Login in Docker
+  #       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+  #     - name: Building Docker Image
+  #       run: docker build . -f client.dockerfile -t bernnardosbo/nginx-fronted:ga-${{ github.run_number }}
+
+  #     - name: Pushing Docker Image
+  #       run: docker push bernnardosbo/nginx-frontend:ga-${{ github.run_number }}
+
+  # updateClientYaml:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+        
