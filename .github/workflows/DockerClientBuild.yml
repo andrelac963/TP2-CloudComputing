@@ -18,7 +18,7 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
       - name: Building Docker Image
-        run: docker build . -f client.dockerfile -t bernnardosbo/nginx-fronted:ga-${{ github.run_number }}
+        run: docker build . -f client.dockerfile -t bernnardosbo/nginx-frontend:ga-${{ github.run_number }}
 
       - name: Pushing Docker Image
         run: docker push bernnardosbo/nginx-frontend:ga-${{ github.run_number }}
