@@ -3,8 +3,9 @@ name: Docker Client Build
 on:
   push:
     paths:
-      - '/client/**'
+      - 'client/**'
     branches: ["master"]
+
 
 jobs:
   build:
