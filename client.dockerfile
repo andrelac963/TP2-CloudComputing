@@ -1,9 +1,9 @@
-FROM node:18-alpine3.17
+FROM node:18-alpine3.17 AS builder
 RUN mkdir /client
 COPY ./client ./client
 WORKDIR /client
 RUN npm install
-RUN npm run build
+RUN npm run k8s-build
 
 FROM nginx:stable
 COPY --from=builder /client/dist /usr/share/nginx/client

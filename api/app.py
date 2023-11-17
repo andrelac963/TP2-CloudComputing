@@ -42,6 +42,7 @@ def recommend():
             return jsonify({"error": str(e)}), 400
 
 
+# NOTE: __name__ is only '__main__' when executed with the python command: python app.py
 if __name__ == '__main__':
     app.run(
         host="150.164.203.31",
