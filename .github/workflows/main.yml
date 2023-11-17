@@ -11,24 +11,45 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - name: test-paths
-          run: echo "funfou"
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-  #     - name: Login in Docker
-  #       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      - name: Login in Docker
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-  #     - name: Building Docker Image
-  #       run: docker build . -f client.dockerfile -t bernnardosbo/nginx-fronted:ga-${{ github.run_number }}
+      - name: Building Docker Image
+        run: docker build . -f client.dockerfile -t bernnardosbo/nginx-fronted:ga-${{ github.run_number }}
 
-  #     - name: Pushing Docker Image
-  #       run: docker push bernnardosbo/nginx-frontend:ga-${{ github.run_number }}
+      - name: Pushing Docker Image
+        run: docker push bernnardosbo/nginx-frontend:ga-${{ github.run_number }}
 
-  # updateClientYaml:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
-        
+  updateClientYaml:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure GitActions ID
+        run: | 
+          git config user.email GIT@ACTIONS.COM
+          git config user.name new_yaml_modification
+      
+      - name: Modify K8S manifest
+        run: sed -i "s+bernnardosbo/nginx-frontend.*+bernnardosbo/nginx-frontend:ga-$RUN_NUMBER+g" k8s/config.yaml
+        env:
+          RUN_NUMBER: ${{ github.run_number }}
+          
+      - name: Push K8s modification
+        run: |
+          git add .
+          git commit -m 'GITACTIONS: k8s manifest update (id: ${{ github.run_number }})'
+          git push origin main
+          
+
+
+
+
+
+
+          
