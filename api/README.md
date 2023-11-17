@@ -1,2 +1,2 @@
 TODO
-- [ ] ports and configs
+- [ 
