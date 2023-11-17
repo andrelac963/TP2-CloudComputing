@@ -4,7 +4,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 CORS(app)
-CORS(app, resources={r"/api/*": {"origins": "http://150.164.203.31:32167"}})
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 app.config['JSON_SORT_KEYS'] = False
 

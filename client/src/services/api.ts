@@ -1,6 +1,7 @@
 import axios from "axios";
+import config from "../../config.js"
 
 export const api = axios.create({
-  baseURL: "http://150.164.203.31:32173/api",
+  baseURL: `${config.BACKEND_ENDPOINT}`,
   withCredentials: false,
 });

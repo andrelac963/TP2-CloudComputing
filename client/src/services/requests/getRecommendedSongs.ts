@@ -1,4 +1,5 @@
 import { api } from "../api";
+import config from "../../../config";
 
 export interface InputSongsType {
   songs: string[];
@@ -11,7 +12,7 @@ export interface RecommendedSongsResponseType {
 }
 
 export async function getRecommendedSongs(body: InputSongsType) {
-  const response = await api.post("/recommend", body, {
+  const response = await api.post(`${config.RECOMMEND_ENDPOINT}`, body, {
     headers: {
       "Content-Type": "application/json",
     },
