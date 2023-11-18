@@ -42,7 +42,7 @@ spec:
       containers:
       - name: backend
       # k8s pull images from dockerhub by default
-        image: bernnardosbo/backend:ga-2
+        image: bernnardosbo/backend:ga-3
         resources:
           limits:
             memory: "1000Mi"
