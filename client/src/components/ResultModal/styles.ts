@@ -16,8 +16,6 @@ export const Overlay = styled.div`
 export const ModalContent = styled.div`
   width: 30rem;
   max-width: 80%;
-  height: 21rem;
-  max-height: 60%;
   padding: 3rem;
   z-index: 10;
 
@@ -41,7 +39,7 @@ export const ResultContainer = styled.div`
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: self-start;
   justify-content: center;
   gap: 1rem;
 

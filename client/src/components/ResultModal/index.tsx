@@ -23,18 +23,18 @@ export function ResultModal({
   return (
     <Overlay>
       <ModalContent>
-        <Title>Parabéns! Você encontrou sua playlist ideal.</Title>
+        <Title>Parabéns! Você encontrou sua playlist ideal!</Title>
         <ResultContainer>
           <TextContainer>
-            <TextBold>Id das playlists recomendadas</TextBold>
-            <Text>{recommendedSongs.playlist_ids}</Text>
+            <TextBold>Id das playlists recomendadas: </TextBold>
+            <Text>{recommendedSongs.playlist_ids.join(", ")}</Text>
           </TextContainer>
           <TextContainer>
-            <TextBold>Versão do aplicativo</TextBold>
+            <TextBold>Versão do aplicativo: </TextBold>
             <Text>{recommendedSongs.version}</Text>
           </TextContainer>
           <TextContainer>
-            <TextBold>Data de geração do modelo</TextBold>
+            <TextBold>Data de geração do modelo: </TextBold>
             <Text>{recommendedSongs.model_date}</Text>
           </TextContainer>
         </ResultContainer>
