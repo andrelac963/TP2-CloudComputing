@@ -1,23 +1,29 @@
-from fpgrowth_py import fpgrowth
+import fpgrowth as fp
 import pandas as pd
+import pickle
 
-# Carregue o conjunto de dados de exemplo
-data = pd.read_csv("./data/playlists-sample-ds1.csv")
+# read csv
+csv_file_path = './data/playlist-sample-ds1.csv'
 
-# Converta o conjunto de dados em um formato apropriado para o FP-Growth
-itemSetList = []
-for index, row in data.iterrows():
-    itemSet = row['Songs'].split(',')  # Suponha que a coluna 'Songs' contenha uma lista de músicas separadas por vírgulas
-    itemSetList.append(itemSet)
+df = pd.read_csv(csv_file_path, sep=',', header=0)
 
-# Defina o suporte mínimo e a confiança mínima
-minSupRatio = 0.1  # Ajuste o suporte mínimo conforme necessário
-minConf = 0.5  # Ajuste a confiança mínima conforme necessário
+# create transactions
+transactions = []
+for index, row in df.iterrows():
+    transactions.append(row['songs'].split(','))
 
-# Execute o FP-Growth para encontrar os frequent itemsets e regras de associação
-freqItemSet, rules = fpgrowth(itemSetList, minSupRatio=minSupRatio, minConf=minConf)
+# create model
+minSupRatio = 0.01
+minConf = 0.5
 
-# Imprima as regras de associação geradas
-for rule in rules:
-    antecedent, consequent, confidence = rule
-    print(f"If {antecedent} then {consequent}, Confidence: {confidence}")
+model = fp.FPGrowth(transactions, minSupRatio, minConf)
+
+# version and model_date
+model.version = 'v1'
+model.model_date = '2020-04-16'
+
+# save model
+model_file_path = './model.pkl'
+
+with open(model_file_path, 'wb') as file:
+    pickle.dump(model, file)

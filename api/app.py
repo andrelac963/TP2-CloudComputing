@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
+import pickle
 
 app = Flask(__name__)
 
@@ -29,12 +30,19 @@ def recommend():
             if not all(isinstance(song, str) for song in songs):
                 return jsonify({"error": "A lista de 'songs' deve conter apenas strings"}), 400
 
-            # Chama o modelo de recomendação
+            with open('../model/model.pkl', 'rb') as file:
+                model = pickle.load(file)
+            
+            recommended_playlists = model.recommend(songs)
+
+            version = model.version
+
+            model_date = model.model_date
 
             response = {
-                "playlist_ids": [1, 2, 3],
-                "version": "1.0",
-                "model_date": "2023-10-12",
+                "playlist_ids": recommended_playlists,
+                "version": version,
+                "model_date": model_date,
             }
 
             return make_response(jsonify(response), 200)
