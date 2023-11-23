@@ -1,6 +1,7 @@
 import fpgrowth as fp
 import pandas as pd
 import pickle
+import datetime
 
 # read csv
 csv_file_path = './data/playlist-sample-ds1.csv'
@@ -20,7 +21,7 @@ model = fp.FPGrowth(transactions, minSupRatio, minConf)
 
 # version and model_date
 model.version = 'v1'
-model.model_date = '2020-04-16'
+model.model_date = datetime.datetime.now().strftime("%d/%m/%Y")
 
 # save model
 model_file_path = './model.pkl'
