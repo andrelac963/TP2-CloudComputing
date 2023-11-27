@@ -18,10 +18,22 @@ class CustomModel:
 
 
 def get_recommendations(songs, custom_model):
-    recommended_playlist = []
+    recommended_playlist = set()
     model = custom_model.rules
 
-    return recommended_playlist
+    print(model)
+
+    for rule in model:
+        rule_song_0 = list(rule[0])[0]
+        rule_song_1 = list(rule[1])[0]
+
+        for song in songs:
+            if song == rule_song_0:
+                recommended_playlist.add(rule_song_1)
+            if song == rule_song_1:
+                recommended_playlist.add(rule_song_0)
+
+    return list(recommended_playlist)
 
 
 @app.route('/api/recommend', methods=['POST'])

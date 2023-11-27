@@ -29,7 +29,7 @@ def main():
     minConf = 0.5
 
     print("Generating rules...")
-    rules = fpgrowth(transactions, minSupRatio, minConf)
+    _itemSet, rules = fpgrowth(transactions, minSupRatio, minConf)
 
     print("Saving model...")
     custom_model = CustomModel(rules)
