@@ -10,6 +10,20 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config['JSON_SORT_KEYS'] = False
 
 
+class CustomModel:
+    def __init__(self, rules):
+        self.rules = rules
+        self.version = None
+        self.model_date = None
+
+
+def get_recommendations(songs, custom_model):
+    recommended_playlist = []
+    model = custom_model.rules
+
+    return recommended_playlist
+
+
 @app.route('/api/recommend', methods=['POST'])
 def recommend():
     if request.method == 'POST':
@@ -31,17 +45,16 @@ def recommend():
                 return jsonify({"error": "A lista de 'songs' deve conter apenas strings"}), 400
 
             with open('../model/model.pkl', 'rb') as file:
-                model = pickle.load(file)
-            
-            recommended_playlists = model.recommend(songs)
+                custom_model = pickle.load(file)
 
-            version = model.version
+            recommended_playlist = get_recommendations(songs, custom_model)
 
-            model_date = model.model_date
+            version = custom_model.version
+            model_date = custom_model.model_date
 
             response = {
-                "playlist_ids": recommended_playlists,
-                "version": version,
+                "playlist": recommended_playlist,
+                "version": "v" + str(version),
                 "model_date": model_date,
             }
 
@@ -53,6 +66,6 @@ def recommend():
 # NOTE: __name__ is only '__main__' when executed with the python command: python app.py
 if __name__ == '__main__':
     app.run(
-        host="150.164.203.31",
+        host="localhost",
         port=32173,
         debug=True)
