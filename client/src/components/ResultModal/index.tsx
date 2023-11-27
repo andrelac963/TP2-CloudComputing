@@ -8,6 +8,7 @@ import {
   Title,
   ResultContainer,
   TextBold,
+  PlaylistContainer,
   TextContainer,
 } from "./styles";
 
@@ -21,14 +22,16 @@ export function ResultModal({
   setResultModalVisibility,
 }: ResultModalProps) {
   return (
-    <Overlay>
-      <ModalContent>
+    <Overlay onClick={() => setResultModalVisibility(false)}>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
         <Title>Parabéns! Você encontrou sua playlist ideal!</Title>
         <ResultContainer>
-          <TextContainer>
+          <PlaylistContainer>
             <TextBold>Playlist recomendada: </TextBold>
-            <Text>{recommendedSongs.playlist.join(", ")}</Text>
-          </TextContainer>
+            {recommendedSongs.playlist.map((song) => (
+              <Text key={song}>{song}</Text>
+            ))}
+          </PlaylistContainer>
           <TextContainer>
             <TextBold>Versão do aplicativo: </TextBold>
             <Text>{recommendedSongs.version}</Text>

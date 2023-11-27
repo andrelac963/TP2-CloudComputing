@@ -4,14 +4,12 @@ import pickle
 import datetime
 
 CSV_FILE_PATHS = ['./data/2023_spotify_ds1.csv', './data/2023_spotify_ds2.csv']
-VERSION_FILE_PATH = './version.txt'
 MODEL_FILE_PATH = './model.pkl'
 
 
 class CustomModel:
     def __init__(self, rules):
         self.rules = rules
-        self.version = None
         self.model_date = None
 
 
@@ -34,13 +32,6 @@ def main():
     print("Saving model...")
     custom_model = CustomModel(rules)
     custom_model.model_date = datetime.datetime.now().strftime("%d/%m/%Y")
-
-    with open(VERSION_FILE_PATH, 'r') as file:
-        version = int(file.read())
-        custom_model.version = version + 1
-
-    with open(VERSION_FILE_PATH, 'w') as file:
-        file.write(str(custom_model.version))
 
     with open(MODEL_FILE_PATH, 'wb') as file:
         pickle.dump(custom_model, file)
