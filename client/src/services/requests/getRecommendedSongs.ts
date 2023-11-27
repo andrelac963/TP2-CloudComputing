@@ -6,7 +6,7 @@ export interface InputSongsType {
 }
 
 export interface RecommendedSongsResponseType {
-  playlist_ids: number[];
+  playlist: string[];
   version: string;
   model_date: string;
 }

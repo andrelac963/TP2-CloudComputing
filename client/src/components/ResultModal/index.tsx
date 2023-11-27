@@ -26,8 +26,8 @@ export function ResultModal({
         <Title>Parabéns! Você encontrou sua playlist ideal!</Title>
         <ResultContainer>
           <TextContainer>
-            <TextBold>Id das playlists recomendadas: </TextBold>
-            <Text>{recommendedSongs.playlist_ids.join(", ")}</Text>
+            <TextBold>Playlist recomendada: </TextBold>
+            <Text>{recommendedSongs.playlist.join(", ")}</Text>
           </TextContainer>
           <TextContainer>
             <TextBold>Versão do aplicativo: </TextBold>

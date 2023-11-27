@@ -11,11 +11,17 @@ app.config['JSON_SORT_KEYS'] = False
 
 
 class CustomModel:
-    def __init__(self, patterns, rules):
-        self.patterns = patterns
+    def __init__(self, rules):
         self.rules = rules
         self.version = None
         self.model_date = None
+
+
+def get_recommendations(songs, custom_model):
+    recommended_playlist = []
+    model = custom_model.rules
+
+    return recommended_playlist
 
 
 @app.route('/api/recommend', methods=['POST'])
@@ -41,15 +47,14 @@ def recommend():
             with open('../model/model.pkl', 'rb') as file:
                 custom_model = pickle.load(file)
 
-            # Substitua isso com sua lógica real para obter recomendações
-            recommended_playlists = custom_model.patterns
+            recommended_playlist = get_recommendations(songs, custom_model)
 
             version = custom_model.version
             model_date = custom_model.model_date
 
             response = {
-                "playlist_ids": recommended_playlists,
-                "version": version,
+                "playlist": recommended_playlist,
+                "version": "v" + str(version),
                 "model_date": model_date,
             }
 

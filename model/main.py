@@ -1,38 +1,50 @@
-import pyfpgrowth as fp
+from fpgrowth_py import fpgrowth
 import pandas as pd
 import pickle
 import datetime
 
+CSV_FILE_PATHS = ['./data/2023_spotify_ds1.csv', './data/2023_spotify_ds2.csv']
+VERSION_FILE_PATH = './version.txt'
+MODEL_FILE_PATH = './model.pkl'
+
+
 class CustomModel:
-    def __init__(self, patterns, rules):
-        self.patterns = patterns
+    def __init__(self, rules):
         self.rules = rules
         self.version = None
         self.model_date = None
 
-# read csv
-csv_file_path = './data/2023_spotify_ds1.csv'
-df = pd.read_csv(csv_file_path, sep=',', header=0)
 
-# create transactions
-transactions = []
-for index, row in df.iterrows():
-    transactions.append(row['track_name'].split(','))
+def main():
+    transactions = []
 
-# create model
-minSupRatio = 0.01
-minConf = 0.5
+    print("Reading csv files...")
+    for csv_file_path in CSV_FILE_PATHS:
+        df = pd.read_csv(csv_file_path, usecols=[
+                         'pid', 'track_name'], sep=',', header=0)
+        transaction = df.groupby('pid')['track_name'].apply(list).tolist()
+        transactions.extend(transaction)
 
-patterns = fp.find_frequent_patterns(
-    transactions, int(minSupRatio * len(transactions)))
-rules = fp.generate_association_rules(patterns, minConf)
+    minSupRatio = 0.1
+    minConf = 0.5
 
-# create custom model object
-custom_model = CustomModel(patterns, rules)
-custom_model.version = 'v1'
-custom_model.model_date = datetime.datetime.now().strftime("%d/%m/%Y")
+    print("Generating rules...")
+    rules = fpgrowth(transactions, minSupRatio, minConf)
 
-# save model
-model_file_path = './model.pkl'
-with open(model_file_path, 'wb') as file:
-    pickle.dump(custom_model, file)
+    print("Saving model...")
+    custom_model = CustomModel(rules)
+    custom_model.model_date = datetime.datetime.now().strftime("%d/%m/%Y")
+
+    with open(VERSION_FILE_PATH, 'r') as file:
+        version = int(file.read())
+        custom_model.version = version + 1
+
+    with open(VERSION_FILE_PATH, 'w') as file:
+        file.write(str(custom_model.version))
+
+    with open(MODEL_FILE_PATH, 'wb') as file:
+        pickle.dump(custom_model, file)
+
+
+if __name__ == "__main__":
+    main()
