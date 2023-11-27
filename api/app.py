@@ -56,7 +56,7 @@ def recommend():
             if not all(isinstance(song, str) for song in songs):
                 return jsonify({"error": "A lista de 'songs' deve conter apenas strings"}), 400
 
-            with open('../model/model.pkl', 'rb') as file:
+            with open('/app/data/model.pkl', 'rb') as file:
                 custom_model = pickle.load(file)
 
             recommended_playlist = get_recommendations(songs, custom_model)
@@ -78,6 +78,6 @@ def recommend():
 # NOTE: __name__ is only '__main__' when executed with the python command: python app.py
 if __name__ == '__main__':
     app.run(
-        host="localhost",
+        host="0.0.0.0",
         port=32173,
         debug=True)

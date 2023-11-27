@@ -50,7 +50,7 @@ RUN --mount=type=bind,source=./api/requirements.txt,target=requirements.txt \
 COPY api/ .
 
 # Expose the port that the application listens on.
-EXPOSE 30530
+EXPOSE 32173
 
 # Run the application.
-CMD flask run --port=30530  --host=0.0.0.0
+CMD flask run --port=32173  --host=0.0.0.0
