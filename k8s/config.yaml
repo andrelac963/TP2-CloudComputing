@@ -12,7 +12,7 @@ spec:
   - port: 30530
     targetPort: 30530 
 ---
-# flask NodePort for external querries
+# flask NodePort service for external querries
 apiVersion: v1
 kind: Service
 metadata:
@@ -22,13 +22,14 @@ spec:
   selector:
     app: backend
   ports:
-  - port: 30530
-    targetPort: 30530 
+  - port: 30531
+    targetPort: 30531 
 ---
 # flask api deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: bernnardooliveira
   name: backend
 spec:
   selector:
@@ -42,13 +43,20 @@ spec:
       containers:
       - name: backend
       # k8s pull images from dockerhub by default
-        image: bernnardosbo/backend:ga-7
+        image: bernnardosbo/backend:ga-9
         resources:
           limits:
             memory: "1000Mi"
-            cpu: "1500m"
+            cpu: "1000m"
         ports:
         - containerPort: 30530
+        volumeMounts:
+        - name: persistent-storage
+          mountPath: /app/data
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: project2-pvc-bernnardooliveira
   replicas: 1
 ---
 ### FRONTEND ###
@@ -69,6 +77,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: bernnardooliveira
   name: frontend
 spec:
   replicas: 1
@@ -82,11 +91,11 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: bernnardosbo/nginx-frontend:ga-4
+        image: bernnardosbo/nginx-frontend:ga-60
         ports:
         - containerPort: 80
         resources:
           limits:
             memory: "1000Mi"
-            cpu: "1500m"
+            cpu: "1000m"
 
