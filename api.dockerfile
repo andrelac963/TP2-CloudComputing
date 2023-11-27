@@ -37,11 +37,11 @@ RUN apt-get install dnsutils -y
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
 RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=./api/python_requirements.txt,target=python_requirements.txt \
-    python -m pip install -r python_requirements.txt
+    --mount=type=bind,source=./api/requirements.txt,target=requirements.txt \
+    python -m pip install -r requirements.txt
 
 RUN --mount=type=bind,source=./api/requirements.txt,target=requirements.txt \
-    apt-get install $(awk '{print $1}' requirements.txt) -y
+    apt-get install wget -y
 
 # Switch to the non-privileged user to run the application.
 # USER appuser

@@ -6,7 +6,6 @@ FROM python:${PYTHON_VERSION} as base
 # prevent pyc files
 ENV PYTHONDONTWRITEBYTECODE=1
 
-# Defina o diretório de trabalho no contêiner
 WORKDIR /app
 
 #
@@ -22,5 +21,4 @@ COPY model/main.py /app/
 # Instale as dependências (no caso, pandas)
 RUN pip install pandas fpgrowth-py
 
-# Execute o seu script Python quando o contêiner for iniciado
 CMD ["python", "main.py"]

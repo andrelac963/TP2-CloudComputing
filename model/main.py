@@ -18,14 +18,12 @@ CSV_FILE_PATH = ENV_DATASET_URL          if ENV_DATASET_URL   else "https://home
 MIN_SUP_RATIO = float(ENV_MIN_SUP_RATIO) if ENV_MIN_SUP_RATIO else 0.07
 MIN_CONF      = float(ENV_MIN_CONF)      if ENV_MIN_CONF      else 0.1
 
-VERSION_FILE_PATH = './version.txt'
 MODEL_FILE_PATH = '/app/data/model.pkl'
 
 
 class CustomModel:
     def __init__(self, rules):
         self.rules = rules
-        self.version = None
         self.model_date = None
 
 
@@ -52,13 +50,6 @@ def main():
     print("Saving model...")
     custom_model = CustomModel(rules)
     custom_model.model_date = datetime.datetime.now().strftime("%d/%m/%Y")
-
-    with open(VERSION_FILE_PATH, 'r') as file:
-        version = int(file.read())
-        custom_model.version = version + 1
-
-    with open(VERSION_FILE_PATH, 'w') as file:
-        file.write(str(custom_model.version))
 
     with open(MODEL_FILE_PATH, 'wb') as file:
         pickle.dump(custom_model, file)

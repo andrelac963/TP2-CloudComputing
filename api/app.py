@@ -13,15 +13,12 @@ app.config['JSON_SORT_KEYS'] = False
 class CustomModel:
     def __init__(self, rules):
         self.rules = rules
-        self.version = None
         self.model_date = None
 
 
 def get_recommendations(songs, custom_model):
     recommended_playlist = set()
     model = custom_model.rules
-
-    print(model)
 
     for rule in model:
         rule_song_0 = list(rule[0])[0]
@@ -61,7 +58,7 @@ def recommend():
 
             recommended_playlist = get_recommendations(songs, custom_model)
 
-            version = custom_model.version
+            version = 1
             model_date = custom_model.model_date
 
             response = {

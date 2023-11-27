@@ -7,8 +7,8 @@ interface AlertProps {
 
 export function Alert({ message, setAlertVisibility }: AlertProps) {
   return (
-    <Overlay>
-      <ModalContent>
+    <Overlay onClick={() => setAlertVisibility(false)}>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
         <Text>{message}</Text>
         <Button onClick={() => setAlertVisibility(false)}>Fechar</Button>
       </ModalContent>

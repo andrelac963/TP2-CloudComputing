@@ -6,7 +6,7 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +16,8 @@ export const Overlay = styled.div`
 export const ModalContent = styled.div`
   width: 30rem;
   max-width: 80%;
+  max-height: 90%;
+  overflow-y: auto;
   padding: 3rem;
   z-index: 10;
 
@@ -39,12 +41,20 @@ export const ResultContainer = styled.div`
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  align-items: self-start;
+  align-items: center;
   justify-content: center;
   gap: 1rem;
 
   border-radius: 0.5rem;
   border: 0.1rem solid #dcdbaf;
+`;
+
+export const PlaylistContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 `;
 
 export const TextContainer = styled.div`
