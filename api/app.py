@@ -20,8 +20,6 @@ def get_recommendations(songs, custom_model):
     recommended_playlist = set()
     model = custom_model.rules
 
-    print(model)
-
     for rule in model:
         rule_song_0 = list(rule[0])[0]
         rule_song_1 = list(rule[1])[0]

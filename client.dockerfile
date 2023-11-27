@@ -1,4 +1,4 @@
-FROM node:18-alpine3.17 AS builder
+FROM node:18-alpine3.17 as builder
 RUN mkdir /client
 COPY ./client ./client
 WORKDIR /client
