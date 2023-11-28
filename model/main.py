@@ -53,7 +53,6 @@ def main():
 
     with open(MODEL_FILE_PATH, 'wb') as file:
         pickle.dump(custom_model, file)
-
-    datetime.datetime.now().s
+        
 if __name__ == "__main__":
     main()

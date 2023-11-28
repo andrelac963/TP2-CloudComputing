@@ -3,12 +3,25 @@ name: Docker API Build
 on:
   push:
     paths:
+      - 'api/version.txt'
       - 'api/**'
       - 'api.dockerfile'
     branches: ["main"]
 
 
 jobs:
+  updateVersion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Changing version
+        run: |
+          current_version=$(<api/version.txt)
+          new_version=$((current_version + 1))
+          echo "$new_version" > api/version.txt
+
   build:
     runs-on: ubuntu-latest
     steps:
