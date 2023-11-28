@@ -1,0 +1,12 @@
+project: bernnardooliveira-project
+source:
+  repoURL: 'https://github.com/BernnardoSBO/TP2-CloudComputing.git'
+  path: k8s
+  targetRevision: HEAD
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: bernnardooliveira
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
