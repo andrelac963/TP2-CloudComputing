@@ -36,7 +36,7 @@ def main():
                         'pid', 'track_name'], sep=',', header=0)
     except (HTTPError, URLError) as e:
         print(f"ERROR: {e}", file=sys.stderr)
-        exit(1)
+        exit(1) 
     except Exception as e:
         print(f"Untreated Exception: {e}", file=sys.stderr)
         exit(1)
