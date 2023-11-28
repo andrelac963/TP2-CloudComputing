@@ -15,7 +15,7 @@ spec:
         cpu: "1000m"
     volumeMounts:
     - name: persistent-storage
-      mountPath: /app/data
+      mountPath: /data
     env:
     - name: DATASET_URL
       value: "https://homepages.dcc.ufmg.br/~cunha/hosted/cloudcomp-2023s2-datasets/2023_spotify_ds1.csv"

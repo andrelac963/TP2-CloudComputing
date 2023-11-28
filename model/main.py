@@ -18,7 +18,7 @@ CSV_FILE_PATH = ENV_DATASET_URL          if ENV_DATASET_URL   else "https://home
 MIN_SUP_RATIO = float(ENV_MIN_SUP_RATIO) if ENV_MIN_SUP_RATIO else 0.07
 MIN_CONF      = float(ENV_MIN_CONF)      if ENV_MIN_CONF      else 0.1
 
-MODEL_FILE_PATH = '/app/data/model.pkl'
+MODEL_FILE_PATH = '/data/model.pkl'
 
 
 class CustomModel:

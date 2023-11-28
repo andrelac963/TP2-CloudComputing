@@ -9,6 +9,7 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 app.config['JSON_SORT_KEYS'] = False
 
+MODEL_PATH = '/data/model.pkl'
 
 class CustomModel:
     def __init__(self, rules):
@@ -32,11 +33,10 @@ def get_recommendations(songs, custom_model):
 
     return list(recommended_playlist)
 
-
 @app.route('/api/recommend', methods=['POST'])
 def recommend():
     if request.method == 'POST':
-        try:
+        try:            
             data = request.get_json()
 
             if 'songs' not in data:
@@ -53,7 +53,7 @@ def recommend():
             if not all(isinstance(song, str) for song in songs):
                 return jsonify({"error": "A lista de 'songs' deve conter apenas strings"}), 400
 
-            with open('/app/data/model.pkl', 'rb') as file:
+            with open(MODEL_PATH, 'rb') as file:
                 custom_model = pickle.load(file)
 
             recommended_playlist = get_recommendations(songs, custom_model)
