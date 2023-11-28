@@ -46,6 +46,7 @@ jobs:
           
       - name: Push K8s modification
         run: |
+          git pull
           git add .
           git commit -m 'GITACTIONS: k8s manifest CLIENT update (id: ${{ github.run_number }})'
           git push origin main
