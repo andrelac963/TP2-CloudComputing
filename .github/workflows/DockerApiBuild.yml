@@ -14,9 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
+        uses: actions/checkout@v3          
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Changing version
+      - name: Changing API version
         run: |
           current_version=$(<api/version.txt)
           new_version=$((current_version + 1))
@@ -32,14 +38,6 @@ jobs:
           git add .
           git commit -m 'GITACTIONS: changed API version'
           git push origin main
-          
-
-  build:
-    needs: updateVersion
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
       - name: Login in Docker
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
