@@ -21,6 +21,18 @@ jobs:
           current_version=$(<api/version.txt)
           new_version=$((current_version + 1))
           echo "$new_version" > api/version.txt
+      
+      - name: Configure GitActions ID
+        run: | 
+          git config user.email GIT@ACTIONS.COM
+          git config user.name new_yaml_modification
+
+      - name: Push version modification
+        run: |
+          git add .
+          git commit -m 'GITACTIONS: changed API version'
+          git push origin main
+          
 
   build:
     needs: updateVersion
