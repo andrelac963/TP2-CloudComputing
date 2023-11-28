@@ -58,12 +58,16 @@ def recommend():
 
             recommended_playlist = get_recommendations(songs, custom_model)
 
-            version = 1
+            
+            with open("./version.txt", 'r') as file:
+                version = file.read()
+                
+                
             model_date = custom_model.model_date
 
             response = {
                 "playlist": recommended_playlist,
-                "version": "v" + str(version),
+                "version": "v1." + version,
                 "model_date": model_date,
             }
 
