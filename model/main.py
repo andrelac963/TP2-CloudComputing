@@ -49,11 +49,11 @@ def main():
 
     print("Saving model...")
     custom_model = CustomModel(rules)
-    custom_model.model_date = datetime.datetime.now().strftime("%d/%m/%Y")
+    custom_model.model_date = datetime.datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 
     with open(MODEL_FILE_PATH, 'wb') as file:
         pickle.dump(custom_model, file)
 
-
+    datetime.datetime.now().s
 if __name__ == "__main__":
     main()
