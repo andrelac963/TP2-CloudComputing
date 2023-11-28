@@ -4,6 +4,7 @@ import pickle
 
 app = Flask(__name__)  
 
+
 CORS(app)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
