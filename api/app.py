@@ -18,7 +18,7 @@ class CustomModel:
 
 
 def get_recommendations(songs, custom_model):
-    recommended_playlist = set()
+    recommended_playlist = set() 
     model = custom_model.rules
 
     for rule in model:
