@@ -95,7 +95,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: bernnardosbo/nginx-frontend:ga-7
+        image: bernnardosbo/nginx-frontend:ga-8
         ports:
         - containerPort: 80
         resources:
