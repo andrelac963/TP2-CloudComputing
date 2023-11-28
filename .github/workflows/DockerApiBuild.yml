@@ -23,6 +23,7 @@ jobs:
           echo "$new_version" > api/version.txt
 
   build:
+    needs: updateVersion
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
