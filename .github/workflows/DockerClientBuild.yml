@@ -34,7 +34,11 @@ jobs:
         run: | 
           git config user.email GIT@ACTIONS.COM
           git config user.name new_yaml_modification
-      
+
+      - name: Pull any yaml changes
+        run : |
+          git pull
+
       - name: Modify K8S manifest
         run: sed -i "s+bernnardosbo/nginx-frontend.*+bernnardosbo/nginx-frontend:ga-$RUN_NUMBER+g" k8s/config.yaml
         env:
