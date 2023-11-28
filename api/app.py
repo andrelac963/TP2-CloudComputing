@@ -8,7 +8,7 @@ CORS(app)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 app.config['JSON_SORT_KEYS'] = False
-
+ 
 MODEL_PATH = '/data/model.pkl'
 
 class CustomModel:
