@@ -77,27 +77,3 @@ Montar a imagem só é necessário caso haja alguma alteração na implementaç�
 
 ### Requisitos de sistema:
 Python 3.11.5
-
-# TODO LIST
-### Organização (melhorar ciclo de desenvolvimento)
-- [ ] Definir ambiente para permitir rodar as aplicações localmente, em container docker ou em ambiente k8s
-- [ ] ...
-
-### Backend
-
-- [ ] Implementar chamada de modelo
-- [ ] Automatizar montagens de novas builds com o github actions(?)
-- [ ] ...
-
-### Frontend
-- [ ] Automatizar montagens de novas builds com o github actions(?)
-- [ ] ...
-
-### Modelo
-- [ ] Construir dockerfile
-- [ ] Upar build para o dockerhub
-- [ ] Automatizar montagens de novas builds com o github actions
-- [ ] ...
-
-# References
-https://docs.github.com/en/actions/publishing-packages/publishing-docker-images
