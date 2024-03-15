@@ -1,5 +1,11 @@
 # TP2-CloudComputing
 
+Esse projeto consiste em uma implementação básica de uma pipeline de desenvolvimento. Conta com o uso de conceitos de CI/CD através de tecnologias como Docker, Kubernetes, ArgoCD, GitHubActions, entre outros.
+
+### Autores
+André Luiz Alves
+Bernnardo Seraphim
+
 # Frontend
 
 ### Requisitos de sistema:
