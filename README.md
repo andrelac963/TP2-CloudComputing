@@ -4,6 +4,7 @@ Esse projeto consiste em uma implementação básica de uma pipeline de desenvol
 
 ### Autores
 André Luiz Alves
+
 Bernnardo Seraphim
 
 # Frontend
